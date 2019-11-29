@@ -17,12 +17,34 @@ class App extends Component {
     })
   }
 
+  eliminarCita = id => {
+    const { listaCitas } = this.state
+    const nuevaLista = listaCitas.filter(item => {
+      return item.id !== id
+    })
+    //Actualizar la lista de citas
+    this.setState({
+      listaCitas: nuevaLista,
+    })
+  }
+
+  componentWillMount() {
+    const obtenerCitas = localStorage.getItem('listaCitas')
+    this.setState({
+      listaCitas: JSON.parse(obtenerCitas),
+    })
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('listaCitas', JSON.stringify(this.state.listaCitas))
+  }
+
   render() {
     return (
       <div className="container">
         <Titulo titulo="Citas Medicas" />
         <Formulario agregarCitas={this.agregarCitas} />
-        <ListaCitas {...this.state} />
+        <ListaCitas {...this.state} eliminarCita={this.eliminarCita} />
       </div>
     )
   }

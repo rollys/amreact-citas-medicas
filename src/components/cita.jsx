@@ -2,7 +2,16 @@ import React, { Component } from 'react'
 
 class Cita extends Component {
   render() {
-    const { name, lastname, rol, date, time, description } = this.props
+    const {
+      name,
+      lastname,
+      rol,
+      date,
+      time,
+      description,
+      id,
+      eliminarCita,
+    } = this.props
     return (
       <div
         className="card"
@@ -35,7 +44,9 @@ class Cita extends Component {
           </ul>
         </div>
         <div className="card-footer">
-          <button type="button" className="btn btn-danger float-right">
+          <button onClick={()=>{
+            eliminarCita(id)
+          }} type="button" className="btn btn-danger float-right">
             Eliminar
           </button>
         </div>

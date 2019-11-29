@@ -3,13 +3,15 @@ import Cita from './cita'
 
 class ListaCitas extends Component {
   render() {
-    const { listaCitas } = this.props
+    const { listaCitas, eliminarCita } = this.props
+    const noHayCitas = <h3 className='text-center w-100 text-danger'>No hay citas!!!</h3>
+    const listadoCitas = listaCitas.map(item => {
+      return <Cita key={item.id} {...item} eliminarCita={eliminarCita} />
+    })
     return (
       <div className="jumbotron">
         <div className="card-deck">
-          {listaCitas.map(item => {
-            return <Cita key={item.id} {...item} />
-          })}
+          {listaCitas.length > 0 ? listadoCitas : noHayCitas}
         </div>
       </div>
     )
